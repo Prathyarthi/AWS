@@ -1,0 +1,23 @@
+org: prathyarthi
+app: aws-serverless-lambda
+service: aws-serverless-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+
+functions:
+  serverlessHelloFunction:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: GET
+  helloWorld:
+    handler: hello.handler
+    events:
+      - httpApi:
+          path: /hello
+          method: GET
