@@ -12,7 +12,7 @@ const s3Client = new S3Client({
 });
 
 
-async function getObjectCommand() {
+async function getObjectURL(key) {
     const command = new GetObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: key
@@ -20,4 +20,6 @@ async function getObjectCommand() {
 
     const url = await getSignedUrl(s3Client, command)
     return url
-} 
+}
+
+console.log("URL for the image : ", await getObjectURL("Screenshot (47).png"));
