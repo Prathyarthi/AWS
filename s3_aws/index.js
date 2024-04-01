@@ -1,4 +1,4 @@
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { config } from "dotenv";
 config()
@@ -22,4 +22,17 @@ async function getObjectURL(key) {
     return url
 }
 
-console.log("URL for the image : ", await getObjectURL("Screenshot (47).png"));
+
+async function putObjectURL(filename, contentType) {
+    const command = new PutObjectCommand({
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `/uploads/userImage/${filename}`,
+        ContentType: contentType
+    })
+
+    const url = await getSignedUrl(s3Client, command)
+    return url
+}
+
+// console.log("URL for the image : ", await getObjectURL("Screenshot (47).png"));
+console.log("URL for the image putObject : ", await putObjectURL(`Video-${Date.now().png}`),"image/png");
